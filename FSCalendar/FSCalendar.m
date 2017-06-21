@@ -1189,6 +1189,11 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
         if (self.selectedDate && !self.allowsMultipleSelection) {
             [self deselectDate:self.selectedDate];
         }
+        
+        if (_collectionView.numberOfSections < targetIndexPath.section) {
+            targetIndexPath = [NSIndexPath indexPathForItem:targetIndexPath.item inSection:0];
+        }
+        
         [_collectionView selectItemAtIndexPath:targetIndexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
         FSCalendarCell *cell = (FSCalendarCell *)[_collectionView cellForItemAtIndexPath:targetIndexPath];
         [cell performSelecting];
