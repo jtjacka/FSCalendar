@@ -1201,7 +1201,13 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
         [self selectCounterpartDate:targetDate];
         
     } else if (![_collectionView.indexPathsForSelectedItems containsObject:targetIndexPath]) {
+        
+        if (_collectionView.numberOfSections < targetIndexPath.section) {
+            targetIndexPath = [NSIndexPath indexPathForItem:targetIndexPath.item inSection:0];
+        }
+    
         [_collectionView selectItemAtIndexPath:targetIndexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+    
     }
     
     if (scrollToDate) {
